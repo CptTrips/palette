@@ -10,7 +10,7 @@ void win_write(char* msg, DWORD msg_len, HANDLE file_handle);
 char* generate_header(int filesize, int w, int h);
 void write_int_to_header(char* header, int number, int start);
 void buffer_to_data(char* pixel_buffer, int h, int w, char* data, int pad_len, int byte_w);
-void bmp_write(char* pixel_buffer, int h, int w, const char* filename);
+void bmp_write(char* pixel_buffer, int h, int w, const wchar_t* filename);
 
 
 #endif

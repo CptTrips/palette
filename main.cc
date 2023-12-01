@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
   shade_buffer(pixel_buffer);
 
   cout << "Writing to file\n";
-  bmp_write(pixel_buffer, h, w, "my_palette.bmp");
+  bmp_write(pixel_buffer, h, w, L"my_palette.bmp");
 
   return 0;
 }

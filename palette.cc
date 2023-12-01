@@ -8,6 +8,7 @@ const int HEADER_SIZE = 54;
 
 void win_write(char* msg, DWORD msg_len, HANDLE file_handle)
 {
+
   BOOL error_flag = FALSE;
 
   DWORD bytes_written = 0;
@@ -122,8 +123,9 @@ void buffer_to_data(char* pixel_buffer, int h, int w, char* data, int pad_len, i
 }
 
 // Writes a length 3*h*w byte array to a bitmap of dimensions (h,w)
-void bmp_write(char* pixel_buffer, int h, int w, const char* filename)
+void bmp_write(char* pixel_buffer, int h, int w, const wchar_t* filename)
 {
+
   ofstream fout;
 
   // Pixel buffer needs padding for 4 byte alignment
