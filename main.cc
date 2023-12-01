@@ -1,7 +1,6 @@
 // Create a single-colored bitmap
 #include <iostream>
 #include "palette.h"
-using namespace std;
 
 // Height and width in pixels
 const int h = 1081;
@@ -40,10 +39,10 @@ int main(int argc, char* argv[])
 
   char *pixel_buffer = new char[w*h*3];
 
-  cout << "Shading pixel buffer\n";
+  std::cout << "Shading pixel buffer\n";
   shade_buffer(pixel_buffer);
 
-  cout << "Writing to file\n";
+  std::cout << "Writing to file\n";
   bmp_write(pixel_buffer, h, w, L"my_palette.bmp");
 
   return 0;

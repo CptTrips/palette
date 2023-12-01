@@ -2,7 +2,6 @@
 #include <iostream>
 #include <windows.h>
 #include "palette.h"
-using namespace std;
 
 const int HEADER_SIZE = 54;
 
@@ -21,7 +20,7 @@ void win_write(char* msg, DWORD msg_len, HANDLE file_handle)
 
   if (error_flag == FALSE)
   {
-	  cout << "Unable to write to file.";
+	  std::cout << "Unable to write to file.";
 	  CloseHandle(file_handle);
 	  exit(1);
   }
@@ -29,7 +28,7 @@ void win_write(char* msg, DWORD msg_len, HANDLE file_handle)
   {
 	  if (bytes_written != msg_len)
 	  {
-		  cout << "Write failed to complete: " << bytes_written << " bytes written.";
+		  std::cout << "Write failed to complete: " << bytes_written << " bytes written.";
 		  CloseHandle(file_handle);
 		  exit(1);
 	  }
@@ -126,28 +125,28 @@ void buffer_to_data(char* pixel_buffer, int h, int w, char* data, int pad_len, i
 void bmp_write(char* pixel_buffer, int h, int w, const wchar_t* filename)
 {
 
-  ofstream fout;
+  std::ofstream fout;
 
   // Pixel buffer needs padding for 4 byte alignment
   int pad_len = (4 - (3*w) % 4) % 4;
   int byte_w = 3*w + pad_len;
 
-  cout << "Padding length: " << pad_len << "\n";
+  std::cout << "Padding length: " << pad_len << "\n";
 
   const int filesize = HEADER_SIZE + h * byte_w;
 
-  cout << "Generating header\n";
+  std::cout << "Generating header\n";
   char* header = generate_header(filesize, w, h);
 
-  cout << "Allocating memory for bitmap data (" << h*byte_w << " bytes)\n";
+  std::cout << "Allocating memory for bitmap data (" << h*byte_w << " bytes)\n";
   // This will be too big (I think if h*byte_w is larger than the largest integer)
   char *data = new char[h*byte_w];
 
-  //cout << "Copying pixel buffer to bitmap data\n";
+  //std::cout << "Copying pixel buffer to bitmap data\n";
   buffer_to_data(pixel_buffer, h, w, data, pad_len, byte_w);
 
   // Open file
-  cout << "Opening bitmap file" << filename << "\n";
+  std::cout << "Opening bitmap file" << filename << "\n";
 
   HANDLE file_handle;
 
@@ -163,17 +162,17 @@ void bmp_write(char* pixel_buffer, int h, int w, const wchar_t* filename)
 
   if (file_handle == INVALID_HANDLE_VALUE)
   {
-    cout << "Unable to open file.";
+    std::cout << "Unable to open file.";
     exit(1);
   }
 
-  cout << "Writing bitmap header\n";
+  std::cout << "Writing bitmap header\n";
   win_write(header, HEADER_SIZE, file_handle);
 
-  cout << "Writing bitmap data\n";
+  std::cout << "Writing bitmap data\n";
   win_write(data, filesize - HEADER_SIZE, file_handle);
 
-  cout << "Write finished. Closing "<< filename << "\n";
+  std::cout << "Write finished. Closing "<< filename << "\n";
   CloseHandle(file_handle);
 
   delete[] data;
