@@ -2,9 +2,11 @@ workspace "palette"
     configurations { "Debug", "Release" }
     location "build"
 
+    architecture "x64"
+
 project "palette"
     kind "StaticLib"
-    language "C"
+    language "C++"
     targetdir "lib/%{cfg.buildcfg}"
 
     files {"palette.h", "palette.cc"}
@@ -20,7 +22,7 @@ project "palette"
 
 project "DemoApp"
     kind "ConsoleApp"
-    language "C"
+    language "C++"
     targetdir "bin/%{cfg.buildcfg}"
 
     files {"main.cc"}
