@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Bitmaps
+*.bmp
+
+# Folders
+/bin/
+/lib/
+/.vs/
+/obj/
+/build/
